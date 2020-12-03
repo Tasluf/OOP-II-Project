@@ -2,9 +2,10 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from DoctorPage import Doctor
+from PatientPage import Patient
 
 DoctorList = [("191-45041", "Jasim", "admin"), ("191-45042", "karim", "admin"), ("191-45043", "Rahim", "admin"), ("191-4504", "Masum", "admin"), ("191-4505", "Jon", "admin")]
-PatientList = [("192-65441", "Jasim", "admin"), ("192-65442", "karim", "admin"), ("192-65443", "Rahim", "admin"), ("192-65444", "Masum", "admin"), ("192-65445", "Jon", "admin")]
+PatientList = [("192-65441", "Jakaria", "admin"), ("192-65442", "Hasan", "admin"), ("192-65443", "Roni", "admin"), ("192-65444", "Mannan", "admin"), ("192-65445", "Ajgor", "admin")]
 
 
 class LoginPage:
@@ -27,35 +28,28 @@ class LoginPage:
     def getIdPassword(self):
         id = self.entry_id.get()
         password = self.entry_password.get()
-        success = self.Authentication(id, password)
-
-        if not success[0]:
-            messagebox.showinfo(title='Error', message="Id or Password is incorrect")
-        else:
-            self.root.destroy()
-            Doctor(success[2])
-
+        self.Authentication(id, password)
 
     def Authentication(self, id, password):
         id_first = id.split("-")
         if id_first[0] == "191":
             for i in DoctorList:
                 if i[0] == id and i[2] == password:
-                    doc = "Doctor"
-                    wel = i[1]
-                    return [True, doc, wel]
+                    self.root.destroy()
+                    Doctor(id)
+                    return
             else:
-                return [False]
+                messagebox.showinfo(title='Error', message="Id or Password is incorrect")
         elif id_first[0] == "192":
             for i in PatientList:
                 if i[0] == id and i[2] == password:
-                    pan = "Patient"
-                    wel = i[1]
-                    return [True, pan, wel]
+                    self.root.destroy()
+                    Patient(id)
+                    return
             else:
-                return [False]
+                messagebox.showinfo(title='Error', message="Id or Password is incorrect")
         else:
-            return [False]
+            messagebox.showinfo(title='Error', message="Id or Password is incorrect")
 
 
 if __name__ == '__main__':
