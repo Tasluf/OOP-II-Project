@@ -1,0 +1,15 @@
+Doctor database
+Id	password
+
+Doctor Details database
+id 	name 	type 	Hospital_address 	contact
+
+
+Patient database
+Id	password
+
+Farmacy database
+Id	password
+
+
+
