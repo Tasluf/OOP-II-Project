@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import Button
 from tkinter import messagebox
 from Center import CenterPage
 from PreRecord import Prerecord
@@ -27,32 +28,33 @@ class Doctor:
         self.root = Tk()
         self.root.geometry('640x480')
         self.root.resizable(width=False, height=False)
+        self.root.config(bg="White")
         self.y = 60
         self.item()
         CenterPage(self.root)
         self.root.mainloop()
 
     def item(self):
-        Label(self.root, text="Doctor Page").place(x=290, y=30)
+        Label(self.root, text="Doctor Page", font=("Ubuntu Bold", 16), fg="#707070", bg="white").place(x=250, y=20)
         for i in DoctorList:
             if i[0] == self.id:
                 self.name = i[1]
-        Label(self.root, text="Name: " + self.name).place(x=30, y=self.y + 20)
-        Label(self.root, text="Doctor Id: " + self.id).place(x=30, y=self.y + 50)
+        Label(self.root, text="Name: " + self.name, font=("Ubuntu", 12), fg="#707070", bg="white").place(x=150, y=self.y + 40)
+        Label(self.root, text="Doctor Id: " + self.id, font=("Ubuntu", 12), fg="#707070", bg="white").place(x=150, y=self.y + 70)
 
-        Label(self.root, text="Patient ID").place(x=150, y=self.y + 130)
+        Label(self.root, text="Patient ID", font=("Ubuntu", 12), fg="#707070", bg="white").place(x=150, y=self.y + 110)
         self.entry_id = ttk.Entry(self.root, width=30)
-        self.entry_id.place(x=230, y=self.y + 130)
+        self.entry_id.place(x=250, y=self.y + 115)
 
-        Label(self.root, text="Password").place(x=150, y=self.y + 170)
+        Label(self.root, text="Password", font=("Ubuntu", 12), fg="#707070", bg="white").place(x=150, y=self.y + 160)
         self.entry_password = ttk.Entry(self.root, width=30, show="*")
-        self.entry_password.place(x=230, y=self.y + 170)
+        self.entry_password.place(x=250, y=self.y + 165)
 
-        ttk.Button(self.root, text="Pre Record",
+        Button(self.root, text="Pre Record", bg="#4B4B4B", fg="#FFFDFC", bd="0", padx='20', pady="3", activebackground="#2D2C2C", activeforeground="#FFFDFC",
                    command=lambda: self.getIdPassword("pre")
-                   ).place(x=210, y=self.y + 240)
+                   ).place(x=180, y=self.y + 240)
 
-        ttk.Button(self.root, text="Add Record",
+        Button(self.root, text="Add Record", bg="#4B4B4B", fg="#FFFDFC", bd="0", padx='20', pady="3", activebackground="#2D2C2C", activeforeground="#FFFDFC",
                    command=lambda: self.getIdPassword("add")
                    ).place(x=330, y=self.y + 240)
 
@@ -66,8 +68,8 @@ class Doctor:
         if id_first[0] == "192":
             for i in PatientList:
                 if i[0] == id and i[2] == password:
-                    self.root.destroy()
                     if track == "pre":
+                        self.root.destroy()
                         Prerecord(id)
                     elif track == "add":
                         Addrecord(id, self.id)
@@ -76,3 +78,6 @@ class Doctor:
                 messagebox.showinfo(title='Error', message="Id or Password is incorrect")
         else:
             messagebox.showinfo(title='Error', message="Id or Password is incorrect")
+
+if __name__ == '__main__':
+    Doctor("191-45042")

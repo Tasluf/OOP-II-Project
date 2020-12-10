@@ -1,6 +1,16 @@
 import json
 
 
+def read_from_json():
+    try:
+        with open("record.json", 'r') as f:
+            text = f.read()
+            x = json.loads(text)
+            return x
+    except:
+        return None
+
+
 class jsonfilehandeler:
     def __init__(self, dicto, id, name):
         self.dicto = dicto
@@ -8,18 +18,9 @@ class jsonfilehandeler:
         self.name = name
         self.main()
 
-    def read_from_json(self):
-        try:
-            with open("record.json", 'r') as f:
-                text = f.read()
-                x = json.loads(text)
-                return x
-        except:
-            return None
-
     def main(self):
         main_list = []
-        pre_info = self.read_from_json()
+        pre_info = read_from_json()
 
         if pre_info is None:
             rec = dict()
