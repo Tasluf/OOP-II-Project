@@ -54,9 +54,17 @@ cursor = conn.cursor()
 # cursor.execute("""
 #     DELETE FROM doctor WHERE name = "Sakib";
 # """)
+#Password = admin
 
 cursor.execute("""
-    select * from patientDetails
+    UPDATE patient
+    SET name = 'Bijoy'
+    WHERE id = "192-65442";
+"""
+)
+
+cursor.execute("""
+    select * from patient
 """)
 
 print(cursor.fetchall())
